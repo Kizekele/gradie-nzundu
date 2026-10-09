@@ -3,10 +3,10 @@
 # --- Étape 1 : compilation des assets (Vite / Tailwind) ---
 FROM node:22-alpine AS assets
 WORKDIR /app
-COPY package.json package-lock.json .npmrc ./
+COPY gestion_mambemba/package.json gestion_mambemba/package-lock.json gestion_mambemba/.npmrc ./
 RUN npm ci
-COPY vite.config.js ./
-COPY resources ./resources
+COPY gestion_mambemba/vite.config.js ./
+COPY gestion_mambemba/resources ./resources
 RUN npm run build
 
 # --- Étape 2 : application PHP ---
@@ -24,7 +24,7 @@ ENV PHP_CLI_SERVER_WORKERS=4
 
 WORKDIR /var/www/html
 
-COPY . .
+COPY gestion_mambemba/ ./
 
 RUN mkdir -p \
         storage/app/public \

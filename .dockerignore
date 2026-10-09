@@ -1,0 +1,39 @@
+# VCS / outils
+.git
+.opencode
+gestion_mambemba/.opencode
+gestion_mambemba/.idea
+gestion_mambemba/.vscode
+
+# Documentation et captures du dépôt (inutiles dans l'image)
+Captures
+*.docx
+
+# Secrets : ne jamais embarquer dans l'image
+gestion_mambemba/.env
+gestion_mambemba/.env.*
+!gestion_mambemba/.env.example
+
+# Base SQLite parasite embarquée dans le dossier de l'app (données, pas de code)
+gestion_mambemba/gestion_mambemba
+
+# Dépendances et artefacts reconstruits dans l'image
+gestion_mambemba/node_modules
+gestion_mambemba/vendor
+gestion_mambemba/public/build
+gestion_mambemba/public/hot
+gestion_mambemba/public/storage
+gestion_mambemba/storage/app/public/*
+gestion_mambemba/storage/app/private/*
+gestion_mambemba/storage/framework/cache/*
+gestion_mambemba/storage/framework/sessions/*
+gestion_mambemba/storage/framework/views/*
+gestion_mambemba/storage/logs/*
+gestion_mambemba/bootstrap/cache/*
+gestion_mambemba/database/*.sqlite
+gestion_mambemba/*.sqlite
+
+# Tests / divers
+gestion_mambemba/tests
+gestion_mambemba/.phpunit.result.cache
+gestion_mambemba/.phpunit.cache
