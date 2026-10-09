@@ -22,6 +22,11 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Le serveur PHP intégré peut utiliser plusieurs workers (concurrence)
 ENV PHP_CLI_SERVER_WORKERS=4
 
+# TiDB Cloud impose une connexion TLS. Chemin du bundle CA Debian.
+# Ces valeurs peuvent être surchargées par les variables d'environnement Render.
+ENV MYSQL_ATTR_SSL_CA=/etc/ssl/certs/ca-certificates.crt
+ENV MYSQL_ATTR_SSL_VERIFY_SERVER_CERT=true
+
 WORKDIR /var/www/html
 
 COPY gestion_mambemba/ ./
