@@ -50,6 +50,7 @@
                     <thead>
                         <tr class="bg-[#0d233a] text-white text-left">
                             <th class="px-4 py-3 font-medium">N°</th>
+                            <th class="px-4 py-3 font-medium">Photo</th>
                             <th class="px-4 py-3 font-medium">Matricule</th>
                             <th class="px-4 py-3 font-medium">Nom complet</th>
                             <th class="px-4 py-3 font-medium">Sexe</th>
@@ -68,6 +69,13 @@
                             @endphp
                             <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-3 text-gray-600">{{ $i + 1 }}</td>
+                                <td class="px-4 py-3">
+                                    @if($eleve->photo_url)
+                                        <img src="{{ $eleve->photo_url }}" alt="Photo de {{ $eleve->prenom }} {{ $eleve->nom }}" class="w-10 h-10 rounded-full object-cover border border-gray-300">
+                                    @else
+                                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-400 border border-gray-300 text-xs">—</span>
+                                    @endif
+                                </td>
                                 <td class="px-4 py-3 font-medium text-[#0d233a]">{{ $eleve->matricule }}</td>
                                 <td class="px-4 py-3 text-gray-700">{{ $eleve->nom }} {{ $eleve->postnom }} {{ $eleve->prenom }}</td>
                                 <td class="px-4 py-3 text-gray-600">{{ $eleve->sexe }}</td>
@@ -102,7 +110,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="px-4 py-8 text-center text-gray-500">Aucun élève trouvé.</td>
+                                <td colspan="9" class="px-4 py-8 text-center text-gray-500">Aucun élève trouvé.</td>
                             </tr>
                         @endforelse
                     </tbody>

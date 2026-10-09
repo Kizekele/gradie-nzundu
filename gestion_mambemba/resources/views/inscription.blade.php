@@ -18,7 +18,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('inscription.store') }}" method="POST" class="space-y-10">
+            <form action="{{ route('inscription.store') }}" method="POST" enctype="multipart/form-data" class="space-y-10">
                 @csrf
 
                 <!-- Identité de l'Élève -->
@@ -54,6 +54,12 @@
                             <label class="block text-sm font-medium text-gray-700 mb-1">Lieu de naissance <span class="text-red-500">*</span></label>
                             <input type="text" name="lieu_naissance" value="{{ old('lieu_naissance') }}" required class="w-full bg-white border border-gray-400 rounded-md px-3 py-2.5 focus:outline-none focus:border-[#0d233a]">
                         </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Photo de l'élève</label>
+                        <input type="file" name="photo" accept="image/png,image/jpeg,image/webp" class="w-full bg-white border border-gray-400 rounded-md px-3 py-2.5 focus:outline-none focus:border-[#0d233a]">
+                        <p class="text-xs text-gray-500 mt-1">Formats acceptés : JPG, JPEG, PNG, WEBP (max 2 Mo).</p>
                     </div>
                 </div>
 

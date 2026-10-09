@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Eleve extends Model
 {
@@ -31,6 +32,19 @@ class Eleve extends Model
     protected $casts = [
         'date_naissance' => 'date',
     ];
+
+    protected $appends = [
+        'photo_url',
+    ];
+
+    public function getPhotoUrlAttribute(): ?string
+    {
+        if (! $this->photo) {
+            return null;
+        }
+
+        return Storage::disk(env('PHOTO_DISK', 'public'))->url($this->photo);
+    }
 
     public function inscriptions()
     {

@@ -33,7 +33,12 @@ class InscriptionController extends Controller
             'parent_profession' => 'nullable|string|max:255',
             'parent_telephone' => 'required|string|max:255',
             'parent_adresse' => 'nullable|string|max:255',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        $photoPath = $request->hasFile('photo')
+            ? $request->file('photo')->store('eleves/photos', env('PHOTO_DISK', 'public'))
+            : null;
 
         $annee = date('Y');
         $anneeScolaire = $annee . '-' . ($annee + 1);
@@ -56,6 +61,10 @@ class InscriptionController extends Controller
             }
 
             $eleve = $existingEleve;
+
+            if ($photoPath) {
+                $eleve->update(['photo' => $photoPath]);
+            }
         } else {
             $count = Eleve::where('matricule', 'like', "MB-{$annee}-%")->count() + 1;
             $matricule = sprintf('MB-%s-%03d', $annee, $count);
@@ -76,6 +85,7 @@ class InscriptionController extends Controller
                 'parent_telephone' => $request->parent_telephone,
                 'parent_email' => $request->parent_email ?? null,
                 'parent_adresse' => $request->parent_adresse ?? null,
+                'photo' => $photoPath,
             ]);
         }
 
